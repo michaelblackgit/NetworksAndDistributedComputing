@@ -64,10 +64,13 @@ std::string request_reply(int s, std::string message) {
 	return "";
 }
 
+
+//quit command for socket
 void quitsock(int sock) {
   request_reply(sock, "QUIT\r\n");
 }
 
+//quits both the main server and the passive port with formatting
 void quitprog(int sockpi, int sockdt) {
   quitsock(sockpi);
   quitsock(sockdt);
@@ -77,6 +80,7 @@ void quitprog(int sockpi, int sockdt) {
   exit(0);
 }
 
+//help screen
 void help() {
   std::cout << std::endl;
   std::cout << "**************************************Help***************************************";
@@ -90,6 +94,7 @@ void help() {
   std::cout << std::endl << std::endl;
 }
 
+//obtains, parses, and connects to a passive port - to be cleaned up...
 int pasv(int sockpi) {
   int sockdt;
   std::string strReply = request_reply(sockpi, "PASV\r\n");
@@ -111,6 +116,7 @@ int pasv(int sockpi) {
   return sockdt;
 }
 
+//list command
 void list(int sockpi, int sockdt) {
   std::string strReply = request_reply(sockpi, "LIST\r\n");
   if(strReply.substr(0,3) == "150") {
@@ -122,11 +128,13 @@ void list(int sockpi, int sockdt) {
   quitsock(sockdt);
 }
 
+//retrieve file command
 void retr(int sockpi, int sockdt, std::string file) {
   std::string query = "RETR " + file + "\r\n";
   std::string strReply = request_reply(sockpi, query);
   if(strReply.substr(0,3) == "150") {
     std::string strReply = reply(sockdt);
+    //file stream that writes server reply to a new file on the local host
     std::ofstream filestream;
     filestream.open(file);
     filestream << strReply;
@@ -136,9 +144,9 @@ void retr(int sockpi, int sockdt, std::string file) {
   } else {
     std::cout << std::endl << "File not retrieved... Probably not a file. Try something else." << std::endl << std::endl;
   }
-
 }
 
+//loop for command line.
 void cmdline(int pi) {
   int sockpi = pi;
   std::string cmd;
@@ -165,6 +173,7 @@ void cmdline(int pi) {
   } while(cmd != "QUIT" && cmd != "quit");
 }
 
+//main method - to be cleaned up and modularized....
 int main(int argc , char *argv[])
 {
     int sockpi;
