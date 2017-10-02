@@ -1,4 +1,9 @@
-#define SIMULATOR
+//Michael Black and Derrick Nguyen
+//CECS 327 Lab 2
+
+//Uncomment the following line if you are using the SIMULATOR.
+//#define SIMULATOR
+//If you are using the simulator import the following.
 #ifndef SIMULATOR
     #include <kilolib.h>
     #include <avr/io.h>  // for microcontroller register defs
@@ -13,9 +18,11 @@
     REGISTER_USERDATA(USERDATA)
 #endif
 
-/* Helper function for setting motor speed smoothly
+/**
+ * Helper function for setting motor speed smoothly.
+ * @param ccw
+ * @param cw
  */
-
 void smooth_set_motors(uint8_t ccw, uint8_t cw)
 {
     // OCR2A = ccw;  OCR2B = cw;
@@ -35,6 +42,10 @@ void smooth_set_motors(uint8_t ccw, uint8_t cw)
     set_motors(ccw, cw);
 }
 
+/**
+ * Set the motion when moving the KILOBOT.
+ * @param new_motion the new motion you would like the KILOBOT to take.
+ */
 void set_motion(motion_t new_motion)
 {
     switch(new_motion) {
@@ -53,7 +64,11 @@ void set_motion(motion_t new_motion)
     }
 }
 
-
+/**
+ * Returns whether or not the distance is less than or equal to 90 units.
+ * @param  distance the current int of distance units.
+ * @return          whether or not the distance is less than or equal to 90 units.
+ */
 char in_interval(uint8_t distance)
 {
     //if (distance >= 40 && distance <= 60)
@@ -62,7 +77,10 @@ char in_interval(uint8_t distance)
     return 0;
 }
 
-//
+/**
+ * Returns whether or not the KILOBOT is stabalized.
+ * @return If the KILOBOT has stable COOPERATIVE or AUTONOMOUS neighbors.
+ */
 char is_stabilized()
 {
     uint8_t i=0,j=0;
@@ -77,7 +95,11 @@ char is_stabilized()
     return j == mydata->num_neighbors;
 }
 
-// Search for id in the neighboring nodes
+/**
+ * Search for id in the neighboring nodes.
+ * @param  id The id of the KILOBOT you wish to check.
+ * @return    Whether or not their exists a nearest neighbor.
+ */
 uint8_t exists_nearest_neighbor(uint8_t id)
 {
     uint8_t i;
@@ -90,7 +112,10 @@ uint8_t exists_nearest_neighbor(uint8_t id)
 }
 
 
-// Search for id in the neighboring nodes
+/**
+ * Checks to see whether all KILOBOTs are COOPERATIVE.
+ * @return Whether or not all KILOBOTs are COOPERATIVE.
+ */
 uint8_t are_all_cooperative()
 {
     uint8_t i;
@@ -102,6 +127,10 @@ uint8_t are_all_cooperative()
     return 1;
 }
 
+/**
+ * Gets the nearest two neihbors.
+ * @return The nearest two neighbors.
+ */
 uint8_t get_nearest_two_neighbors()
 {
     uint8_t i, l, k;
@@ -151,6 +180,11 @@ uint8_t get_nearest_two_neighbors()
     return i;
 }
 
+/**
+ * Receive if the KILOBOT is sharing.
+ * @param payload  The current payload.
+ * @param distance The distance between two KILOBOTs.
+ */
 void recv_sharing(uint8_t *payload, uint8_t distance)
 {
     if (payload[ID] == mydata->my_id  || payload[ID] == 0 || !in_interval(distance) ) return;
@@ -187,6 +221,10 @@ void recv_sharing(uint8_t *payload, uint8_t distance)
 
 }
 
+/**
+ * Receive if the KILOBOT is joining.
+ * @param payload The current payload.
+ */
 void recv_joining(uint8_t *payload)
 {
     if (payload[ID] == mydata->my_id) return;
@@ -278,7 +316,11 @@ void recv_election(uint8_t *payload) //payload[leader] which is pretty much min
 
 }
 
-
+/**
+ * Calls joining or election methods if message type is NORMAL.
+ * @param m The message being passed.
+ * @param d Distance measurement.
+ */
 void message_rx(message_t *m, distance_measurement_t *d)
 {
     uint8_t dist = estimate_distance(d);
@@ -303,6 +345,10 @@ void message_rx(message_t *m, distance_measurement_t *d)
 
 /**********************************/
 /**********************************/
+
+/**
+ * Send if the KILOBOT is joining.
+ */
 void send_joining()
 {
     uint8_t i;
@@ -327,6 +373,9 @@ void send_joining()
     }
 }
 
+/**
+ * Send if the KILOBOT is sharing.
+ */
 void send_sharing()
 {
     // Precondition
@@ -355,11 +404,15 @@ void send_election()
     }
 }
 
+/**
+ * This method makes the KILOBOT move if it is the leader.
+ * @param tick This variable is not used.
+ */
 void move(uint8_t tick)
 {
     // TODO: Optional you can make the leader robot move
     // Precondition:
-    if (mydata->motion_state == ACTIVE && mydata->state == COOPERATIVE && mydata->is_leader)
+    if (mydata->state == COOPERATIVE && mydata->is_leader)
     {
 
         if (mydata->time_active == mydata->move_motion[mydata->move_state].time)
@@ -380,7 +433,7 @@ void move(uint8_t tick)
         }
         set_motion(mydata->move_motion[mydata->move_state].motion);
         mydata->time_active++;
-        set_motion(STOP);
+        //set_motion(STOP);
     }
     else
     {
@@ -389,7 +442,9 @@ void move(uint8_t tick)
 
 }
 
-
+/**
+ * Loop to keep the program running.
+ */
 void loop()
 {
     delay(30);
@@ -404,19 +459,28 @@ void loop()
     mydata->now++;
 }
 
-
+/**
+ * Returns message.
+ * @return Message to be returned.
+ */
 message_t *message_tx()
 {
     mydata->message_sent = 1;
     return &mydata->msg;
 }
 
+/**
+ * Method for if the message is successful.
+ */
 void message_tx_success() {
     mydata->message_sent = 1;
     mydata->msg.data[MSG] = NULL_MSG;
     mydata->msg.crc = message_crc(&mydata->msg);
 }
 
+/**
+ * Method for setup.
+ */
 void setup() {
     rand_seed(rand_hard());
 
@@ -460,6 +524,10 @@ void setup() {
 #ifdef SIMULATOR
 /* provide a text string for the simulator status bar about this bot */
 static char botinfo_buffer[10000];
+/**
+ * Method for KILOBOT information.
+ * @return  the buffer of the KILOBOT information.
+ */
 char *cb_botinfo(void)
 {
     char *p = botinfo_buffer;
@@ -473,6 +541,10 @@ char *cb_botinfo(void)
 }
 #endif
 
+/**
+ * Main method.
+ * @return 0 if the program terminates safely.
+ */
 int main() {
     kilo_init();
     kilo_message_tx = message_tx;

@@ -1,0 +1,282 @@
+\hypertarget{ring_8c}{}\section{ring.\+c File Reference}
+\label{ring_8c}\index{ring.\+c@{ring.\+c}}
+{\ttfamily \#include $<$kilolib.\+h$>$}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ring.\+h\char`\"{}}\newline
+Include dependency graph for ring.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ring_8c_a540b8ce2367b2cf4b32c8b8c7e9642fc}{smooth\+\_\+set\+\_\+motors} (uint8\+\_\+t ccw, uint8\+\_\+t cw)
+\item 
+void \hyperlink{ring_8c_a88524e838112e1905cc3f74b0735ae71}{set\+\_\+motion} (\hyperlink{ring_8h_af714dce6622a529fd1e432cb0dbfe0a1}{motion\+\_\+t} new\+\_\+motion)
+\item 
+char \hyperlink{ring_8c_a764ba1034860f888b777fdf475143667}{in\+\_\+interval} (uint8\+\_\+t distance)
+\item 
+char \hyperlink{ring_8c_a77db9a24f35da1c9278ccd2d15720552}{is\+\_\+stabilized} ()
+\item 
+uint8\+\_\+t \hyperlink{ring_8c_a421bd0c8e972c872a4c101c7fe2776db}{exists\+\_\+nearest\+\_\+neighbor} (uint8\+\_\+t id)
+\item 
+uint8\+\_\+t \hyperlink{ring_8c_acc148f4ab3c9d5f09b3db2a3077b3fc1}{are\+\_\+all\+\_\+cooperative} ()
+\item 
+uint8\+\_\+t \hyperlink{ring_8c_af19fc3162e19356dfdd8d2d04fb98ad9}{get\+\_\+nearest\+\_\+two\+\_\+neighbors} ()
+\item 
+void \hyperlink{ring_8c_ad8d6e8bd005b92febac972bac5171128}{recv\+\_\+sharing} (uint8\+\_\+t $\ast$payload, uint8\+\_\+t distance)
+\item 
+void \hyperlink{ring_8c_a27b20f1b26960043194f20584b81f3c9}{recv\+\_\+joining} (uint8\+\_\+t $\ast$payload)
+\item 
+void \hyperlink{ring_8c_ad1b5e8bdcafee199c2a5e0f255ac6585}{prepare\+\_\+message} (uint8\+\_\+t m, uint8\+\_\+t receiver)
+\item 
+void \hyperlink{ring_8c_ac178becefc5a6cb069d7204976ae4506}{recv\+\_\+election} (uint8\+\_\+t $\ast$payload)
+\item 
+void \hyperlink{ring_8c_a41166d26230bdddde589f3ab36a422b6}{message\+\_\+rx} (message\+\_\+t $\ast$m, distance\+\_\+measurement\+\_\+t $\ast$d)
+\item 
+void \hyperlink{ring_8c_a1695dcc0c6a920317d739886e3266093}{send\+\_\+joining} ()
+\item 
+void \hyperlink{ring_8c_a95a8f45823e9116b153d0b1f7eaa6201}{send\+\_\+sharing} ()
+\item 
+void \hyperlink{ring_8c_ab9082108a5add8649dfe4d65c7d7b676}{send\+\_\+election} ()
+\item 
+void \hyperlink{ring_8c_a34f4768b59989ab2a1fa2e480b7b3f33}{move} (uint8\+\_\+t tick)
+\item 
+void \hyperlink{ring_8c_afe461d27b9c48d5921c00d521181f12f}{loop} ()
+\item 
+message\+\_\+t $\ast$ \hyperlink{ring_8c_a7fe98b6e71da81f72143305f649beb63}{message\+\_\+tx} ()
+\item 
+void \hyperlink{ring_8c_a0f57ca4676befec475a590c8b8d78d8e}{message\+\_\+tx\+\_\+success} ()
+\item 
+void \hyperlink{ring_8c_a4fc01d736fe50cf5b977f755b675f11d}{setup} ()
+\item 
+int \hyperlink{ring_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_u_s_e_r_d_a_t_a}{U\+S\+E\+R\+D\+A\+TA} \hyperlink{ring_8c_aef075af0d64685fdedc8a6c438879721}{my\+Data}
+\item 
+\hyperlink{struct_u_s_e_r_d_a_t_a}{U\+S\+E\+R\+D\+A\+TA} $\ast$ \hyperlink{ring_8c_aea359a8a447bf75f7667f25d54db4cd7}{mydata} = \&\hyperlink{ring_8c_aef075af0d64685fdedc8a6c438879721}{my\+Data}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ring_8c_acc148f4ab3c9d5f09b3db2a3077b3fc1}\label{ring_8c_acc148f4ab3c9d5f09b3db2a3077b3fc1}} 
+\index{ring.\+c@{ring.\+c}!are\+\_\+all\+\_\+cooperative@{are\+\_\+all\+\_\+cooperative}}
+\index{are\+\_\+all\+\_\+cooperative@{are\+\_\+all\+\_\+cooperative}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{are\+\_\+all\+\_\+cooperative()}{are\_all\_cooperative()}}
+{\footnotesize\ttfamily uint8\+\_\+t are\+\_\+all\+\_\+cooperative (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Checks to see whether all K\+I\+L\+O\+B\+O\+Ts are C\+O\+O\+P\+E\+R\+A\+T\+I\+VE. \begin{DoxyReturn}{Returns}
+Whether or not all K\+I\+L\+O\+B\+O\+Ts are C\+O\+O\+P\+E\+R\+A\+T\+I\+VE. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ring_8c_a421bd0c8e972c872a4c101c7fe2776db}\label{ring_8c_a421bd0c8e972c872a4c101c7fe2776db}} 
+\index{ring.\+c@{ring.\+c}!exists\+\_\+nearest\+\_\+neighbor@{exists\+\_\+nearest\+\_\+neighbor}}
+\index{exists\+\_\+nearest\+\_\+neighbor@{exists\+\_\+nearest\+\_\+neighbor}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{exists\+\_\+nearest\+\_\+neighbor()}{exists\_nearest\_neighbor()}}
+{\footnotesize\ttfamily uint8\+\_\+t exists\+\_\+nearest\+\_\+neighbor (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{id }\end{DoxyParamCaption})}
+
+Search for id in the neighboring nodes. 
+\begin{DoxyParams}{Parameters}
+{\em id} & The id of the K\+I\+L\+O\+B\+OT you wish to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether or not their exists a nearest neighbor. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ring_8c_af19fc3162e19356dfdd8d2d04fb98ad9}\label{ring_8c_af19fc3162e19356dfdd8d2d04fb98ad9}} 
+\index{ring.\+c@{ring.\+c}!get\+\_\+nearest\+\_\+two\+\_\+neighbors@{get\+\_\+nearest\+\_\+two\+\_\+neighbors}}
+\index{get\+\_\+nearest\+\_\+two\+\_\+neighbors@{get\+\_\+nearest\+\_\+two\+\_\+neighbors}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{get\+\_\+nearest\+\_\+two\+\_\+neighbors()}{get\_nearest\_two\_neighbors()}}
+{\footnotesize\ttfamily uint8\+\_\+t get\+\_\+nearest\+\_\+two\+\_\+neighbors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the nearest two neihbors. \begin{DoxyReturn}{Returns}
+The nearest two neighbors. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ring_8c_a764ba1034860f888b777fdf475143667}\label{ring_8c_a764ba1034860f888b777fdf475143667}} 
+\index{ring.\+c@{ring.\+c}!in\+\_\+interval@{in\+\_\+interval}}
+\index{in\+\_\+interval@{in\+\_\+interval}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{in\+\_\+interval()}{in\_interval()}}
+{\footnotesize\ttfamily char in\+\_\+interval (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{distance }\end{DoxyParamCaption})}
+
+Returns whether or not the distance is less than or equal to 90 units. 
+\begin{DoxyParams}{Parameters}
+{\em distance} & the current int of distance units. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+whether or not the distance is less than or equal to 90 units. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ring_8c_a77db9a24f35da1c9278ccd2d15720552}\label{ring_8c_a77db9a24f35da1c9278ccd2d15720552}} 
+\index{ring.\+c@{ring.\+c}!is\+\_\+stabilized@{is\+\_\+stabilized}}
+\index{is\+\_\+stabilized@{is\+\_\+stabilized}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{is\+\_\+stabilized()}{is\_stabilized()}}
+{\footnotesize\ttfamily char is\+\_\+stabilized (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns whether or not the K\+I\+L\+O\+B\+OT is stabalized. \begin{DoxyReturn}{Returns}
+If the K\+I\+L\+O\+B\+OT has stable C\+O\+O\+P\+E\+R\+A\+T\+I\+VE or A\+U\+T\+O\+N\+O\+M\+O\+US neighbors. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ring_8c_afe461d27b9c48d5921c00d521181f12f}\label{ring_8c_afe461d27b9c48d5921c00d521181f12f}} 
+\index{ring.\+c@{ring.\+c}!loop@{loop}}
+\index{loop@{loop}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Loop to keep the program running. \mbox{\Hypertarget{ring_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{ring_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{ring.\+c@{ring.\+c}!main@{main}}
+\index{main@{main}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Main method. \begin{DoxyReturn}{Returns}
+0 if the program terminates safely. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ring_8c_a41166d26230bdddde589f3ab36a422b6}\label{ring_8c_a41166d26230bdddde589f3ab36a422b6}} 
+\index{ring.\+c@{ring.\+c}!message\+\_\+rx@{message\+\_\+rx}}
+\index{message\+\_\+rx@{message\+\_\+rx}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{message\+\_\+rx()}{message\_rx()}}
+{\footnotesize\ttfamily void message\+\_\+rx (\begin{DoxyParamCaption}\item[{message\+\_\+t $\ast$}]{m,  }\item[{distance\+\_\+measurement\+\_\+t $\ast$}]{d }\end{DoxyParamCaption})}
+
+Calls joining or election methods if message type is N\+O\+R\+M\+AL. 
+\begin{DoxyParams}{Parameters}
+{\em m} & The message being passed. \\
+\hline
+{\em d} & Distance measurement. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ring_8c_a7fe98b6e71da81f72143305f649beb63}\label{ring_8c_a7fe98b6e71da81f72143305f649beb63}} 
+\index{ring.\+c@{ring.\+c}!message\+\_\+tx@{message\+\_\+tx}}
+\index{message\+\_\+tx@{message\+\_\+tx}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{message\+\_\+tx()}{message\_tx()}}
+{\footnotesize\ttfamily message\+\_\+t$\ast$ message\+\_\+tx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns message. \begin{DoxyReturn}{Returns}
+Message to be returned. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ring_8c_a0f57ca4676befec475a590c8b8d78d8e}\label{ring_8c_a0f57ca4676befec475a590c8b8d78d8e}} 
+\index{ring.\+c@{ring.\+c}!message\+\_\+tx\+\_\+success@{message\+\_\+tx\+\_\+success}}
+\index{message\+\_\+tx\+\_\+success@{message\+\_\+tx\+\_\+success}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{message\+\_\+tx\+\_\+success()}{message\_tx\_success()}}
+{\footnotesize\ttfamily void message\+\_\+tx\+\_\+success (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Method for if the message is successful. \mbox{\Hypertarget{ring_8c_a34f4768b59989ab2a1fa2e480b7b3f33}\label{ring_8c_a34f4768b59989ab2a1fa2e480b7b3f33}} 
+\index{ring.\+c@{ring.\+c}!move@{move}}
+\index{move@{move}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily void move (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{tick }\end{DoxyParamCaption})}
+
+This method makes the K\+I\+L\+O\+B\+OT move if it is the leader. 
+\begin{DoxyParams}{Parameters}
+{\em tick} & This variable is not used. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ring_8c_ad1b5e8bdcafee199c2a5e0f255ac6585}\label{ring_8c_ad1b5e8bdcafee199c2a5e0f255ac6585}} 
+\index{ring.\+c@{ring.\+c}!prepare\+\_\+message@{prepare\+\_\+message}}
+\index{prepare\+\_\+message@{prepare\+\_\+message}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{prepare\+\_\+message()}{prepare\_message()}}
+{\footnotesize\ttfamily void prepare\+\_\+message (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{m,  }\item[{uint8\+\_\+t}]{receiver }\end{DoxyParamCaption})}
+
+This method prepares the message to be sent. We added the message data\textquotesingle{}s leader. 
+\begin{DoxyParams}{Parameters}
+{\em m} & The message to be sent. \\
+\hline
+{\em receiver} & The receiving Kilombo robot\textquotesingle{}s ID. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ring_8c_ac178becefc5a6cb069d7204976ae4506}\label{ring_8c_ac178becefc5a6cb069d7204976ae4506}} 
+\index{ring.\+c@{ring.\+c}!recv\+\_\+election@{recv\+\_\+election}}
+\index{recv\+\_\+election@{recv\+\_\+election}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{recv\+\_\+election()}{recv\_election()}}
+{\footnotesize\ttfamily void recv\+\_\+election (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{payload }\end{DoxyParamCaption})}
+
+This looks at current minimum ID for the robots and compares it to the ID of the current robot. If the robot is less than the minimum, it is set to the new leader. If the robot receives its own ID that means it is indeed the leader. 
+\begin{DoxyParams}{Parameters}
+{\em payload} & ayload\mbox{[}L\+E\+A\+D\+ER\mbox{]} is used to access the current minimum ID of the robots. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ring_8c_a27b20f1b26960043194f20584b81f3c9}\label{ring_8c_a27b20f1b26960043194f20584b81f3c9}} 
+\index{ring.\+c@{ring.\+c}!recv\+\_\+joining@{recv\+\_\+joining}}
+\index{recv\+\_\+joining@{recv\+\_\+joining}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{recv\+\_\+joining()}{recv\_joining()}}
+{\footnotesize\ttfamily void recv\+\_\+joining (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{payload }\end{DoxyParamCaption})}
+
+Receive if the K\+I\+L\+O\+B\+OT is joining. 
+\begin{DoxyParams}{Parameters}
+{\em payload} & The current payload. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ring_8c_ad8d6e8bd005b92febac972bac5171128}\label{ring_8c_ad8d6e8bd005b92febac972bac5171128}} 
+\index{ring.\+c@{ring.\+c}!recv\+\_\+sharing@{recv\+\_\+sharing}}
+\index{recv\+\_\+sharing@{recv\+\_\+sharing}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{recv\+\_\+sharing()}{recv\_sharing()}}
+{\footnotesize\ttfamily void recv\+\_\+sharing (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{payload,  }\item[{uint8\+\_\+t}]{distance }\end{DoxyParamCaption})}
+
+Receive if the K\+I\+L\+O\+B\+OT is sharing. 
+\begin{DoxyParams}{Parameters}
+{\em payload} & The current payload. \\
+\hline
+{\em distance} & The distance between two K\+I\+L\+O\+B\+O\+Ts. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ring_8c_ab9082108a5add8649dfe4d65c7d7b676}\label{ring_8c_ab9082108a5add8649dfe4d65c7d7b676}} 
+\index{ring.\+c@{ring.\+c}!send\+\_\+election@{send\+\_\+election}}
+\index{send\+\_\+election@{send\+\_\+election}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{send\+\_\+election()}{send\_election()}}
+{\footnotesize\ttfamily void send\+\_\+election (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This method is used to call the function to prepare the message to be sent for elected. \mbox{\Hypertarget{ring_8c_a1695dcc0c6a920317d739886e3266093}\label{ring_8c_a1695dcc0c6a920317d739886e3266093}} 
+\index{ring.\+c@{ring.\+c}!send\+\_\+joining@{send\+\_\+joining}}
+\index{send\+\_\+joining@{send\+\_\+joining}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{send\+\_\+joining()}{send\_joining()}}
+{\footnotesize\ttfamily void send\+\_\+joining (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Send if the K\+I\+L\+O\+B\+OT is joining. \mbox{\Hypertarget{ring_8c_a95a8f45823e9116b153d0b1f7eaa6201}\label{ring_8c_a95a8f45823e9116b153d0b1f7eaa6201}} 
+\index{ring.\+c@{ring.\+c}!send\+\_\+sharing@{send\+\_\+sharing}}
+\index{send\+\_\+sharing@{send\+\_\+sharing}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{send\+\_\+sharing()}{send\_sharing()}}
+{\footnotesize\ttfamily void send\+\_\+sharing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Send if the K\+I\+L\+O\+B\+OT is sharing. \mbox{\Hypertarget{ring_8c_a88524e838112e1905cc3f74b0735ae71}\label{ring_8c_a88524e838112e1905cc3f74b0735ae71}} 
+\index{ring.\+c@{ring.\+c}!set\+\_\+motion@{set\+\_\+motion}}
+\index{set\+\_\+motion@{set\+\_\+motion}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{set\+\_\+motion()}{set\_motion()}}
+{\footnotesize\ttfamily void set\+\_\+motion (\begin{DoxyParamCaption}\item[{\hyperlink{ring_8h_af714dce6622a529fd1e432cb0dbfe0a1}{motion\+\_\+t}}]{new\+\_\+motion }\end{DoxyParamCaption})}
+
+Set the motion when moving the K\+I\+L\+O\+B\+OT. 
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+motion} & the new motion you would like the K\+I\+L\+O\+B\+OT to take. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ring_8c_a4fc01d736fe50cf5b977f755b675f11d}\label{ring_8c_a4fc01d736fe50cf5b977f755b675f11d}} 
+\index{ring.\+c@{ring.\+c}!setup@{setup}}
+\index{setup@{setup}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Method for setup. \mbox{\Hypertarget{ring_8c_a540b8ce2367b2cf4b32c8b8c7e9642fc}\label{ring_8c_a540b8ce2367b2cf4b32c8b8c7e9642fc}} 
+\index{ring.\+c@{ring.\+c}!smooth\+\_\+set\+\_\+motors@{smooth\+\_\+set\+\_\+motors}}
+\index{smooth\+\_\+set\+\_\+motors@{smooth\+\_\+set\+\_\+motors}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{smooth\+\_\+set\+\_\+motors()}{smooth\_set\_motors()}}
+{\footnotesize\ttfamily void smooth\+\_\+set\+\_\+motors (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{ccw,  }\item[{uint8\+\_\+t}]{cw }\end{DoxyParamCaption})}
+
+Helper function for setting motor speed smoothly. 
+\begin{DoxyParams}{Parameters}
+{\em ccw} & \\
+\hline
+{\em cw} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{ring_8c_aef075af0d64685fdedc8a6c438879721}\label{ring_8c_aef075af0d64685fdedc8a6c438879721}} 
+\index{ring.\+c@{ring.\+c}!my\+Data@{my\+Data}}
+\index{my\+Data@{my\+Data}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{my\+Data}{myData}}
+{\footnotesize\ttfamily \hyperlink{struct_u_s_e_r_d_a_t_a}{U\+S\+E\+R\+D\+A\+TA} my\+Data}
+
+\mbox{\Hypertarget{ring_8c_aea359a8a447bf75f7667f25d54db4cd7}\label{ring_8c_aea359a8a447bf75f7667f25d54db4cd7}} 
+\index{ring.\+c@{ring.\+c}!mydata@{mydata}}
+\index{mydata@{mydata}!ring.\+c@{ring.\+c}}
+\subsubsection{\texorpdfstring{mydata}{mydata}}
+{\footnotesize\ttfamily \hyperlink{struct_u_s_e_r_d_a_t_a}{U\+S\+E\+R\+D\+A\+TA}$\ast$ mydata = \&\hyperlink{ring_8c_aef075af0d64685fdedc8a6c438879721}{my\+Data}}
+
