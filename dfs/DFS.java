@@ -13,7 +13,8 @@ import com.google.gson.stream.JsonReader;
 
 public class DFS {
   int port;
-  Chord  chord;
+  Chord chord;
+  Chord metadataChord;
 
   private long md5(String objectName) {
     try {
@@ -50,7 +51,7 @@ public class DFS {
   }
 
   public void touch(String fileName) throws Exception {
-    long guid = md5("" + port + "" + fileName + "" + "1");
+    long guid = md5("" + fileName + "" + "1");
     Result result = readMetaData();
     Metadata metadata = result.getMetadata();
 
@@ -70,8 +71,11 @@ public class DFS {
     newFile.setPages(newPages);
 
     metadata.addFile(newFile);
+
     FileStream stream = formatMetaData(metadata);
     writeMetaData(stream);
+    ChordMessageInterface peer = chord.locateSuccessor(guid);
+    peer.put(guid, new FileStream());
   }
 
   public void rm(String fileName) throws Exception {
@@ -79,9 +83,15 @@ public class DFS {
     Metadata metadata = result.getMetadata();
     List<File> files = metadata.getFiles();
     Iterator<File> ite = files.iterator();
+
     while(ite.hasNext()) {
       File file = ite.next();
       if(file.getName().equals(fileName)) {
+        for(int i = 0; i < file.getPages().size(); i++) {
+          long guid = md5("" + fileName + "" + (i + 1));
+          ChordMessageInterface peer = chord.locateSuccessor(guid);
+          peer.delete(guid);
+        }
         ite.remove();
       }
     }
@@ -94,37 +104,100 @@ public class DFS {
     Metadata metadata = result.getMetadata();
     List<File> files = metadata.getFiles();
     Iterator<File> ite = files.iterator();
+
     while(ite.hasNext()) {
       File file = ite.next();
       if(file.getName().equals(oldName)) {
         file.setName(newName);
+
+        for(int i = 0; i < file.getPages().size(); i++) {
+          Page page = file.getPages().get(i);
+          long oldGuid = Long.parseLong(page.getGuid());
+          ChordMessageInterface peer = chord.locateSuccessor(oldGuid);
+          InputStream stream = peer.get(oldGuid);
+          peer.delete(oldGuid);
+          file.removePage(page);
+
+          long newGuid = md5("" + newName + "" + (i+1));
+          page.setGuid(Long.toString(newGuid));
+          file.addPage(page);
+          peer = chord.locateSuccessor(newGuid);
+          peer.put(newGuid, stream);
+        }
       }
     }
     FileStream stream = formatMetaData(metadata);
     writeMetaData(stream);
   }
 
-  public Byte[] read(String fileName, int pageNumber) throws Exception {
-    // TODO: read pageNumber from fileName
-    return null;
+  public void read(String fileName, int pageNumber) throws Exception {
+    long guid = md5("" + fileName + "" + pageNumber);
+    ChordMessageInterface peer = chord.locateSuccessor(guid);
+    InputStream inputStream = peer.get(guid);
+    FileOutputStream outputStream = new FileOutputStream("./temp.txt");
+
+    while (inputStream.available() > 0)
+        outputStream.write(inputStream.read());
+    outputStream.close();
+
+    java.io.File tempFile = new java.io.File("./temp.txt");
+    Scanner scan = new Scanner(tempFile);
+
+    while(scan.hasNext()) {
+      System.out.println(scan.nextLine());
+    }
   }
 
-  public Byte[] tail(String fileName) throws Exception {
-    // TODO: return the last page of the fileName
-    return null;
+  public void tail(String fileName) throws Exception {
+    Result result = readMetaData();
+    Metadata metadata = result.getMetadata();
+    List<File> files = metadata.getFiles();
+    int lastPage = -1;
+    for(File file: files) {
+      if(file.getName().equals(fileName)) {
+        lastPage = Integer.parseInt(file.getNumberOfPages());
+        break;
+      }
+    }
+    read(fileName, lastPage);
   }
 
-  public Byte[] head(String fileName) throws Exception {
-    // TODO: return the first page of the fileName
-    return null;
+  public void head(String fileName) throws Exception {
+    read(fileName, 1);
   }
 
-  public void append(String filename, Byte[] data) throws Exception {
-    // TODO: append data to fileName. If it is needed, add a new page.
-    // Let guid be the last page in Metadata.filename
-    //ChordMessageInterface peer = chord.locateSuccessor(guid);
-    //peer.put(guid, data);
-    // Write Metadata
+  public void append(String filename, String filepath) throws Exception {
+    Result result = readMetaData();
+    Metadata metadata = result.getMetadata();
+    List<File> files = metadata.getFiles();
+    int pageNo = -1;
+    long pageLength = new java.io.File(filepath).length();
+
+    for(File file : files) {
+      if(file.getName().equals(filename)) {
+        pageNo = Integer.parseInt(file.getNumberOfPages());
+        if((Long.parseLong(file.getPages().get(pageNo - 1).getSize()) + pageLength) > Long.parseLong(file.getPageSize())) {
+          file.getPages().add(new Page());
+          pageNo++;
+          file.setNumberOfPages(Integer.toString(pageNo));
+        }
+        break;
+      }
+    }
+    long guid = md5("" + filename + "" + pageNo);
+    ChordMessageInterface peer = chord.locateSuccessor(guid);
+    InputStream inputStream = peer.get(guid);
+    FileOutputStream outputStream = new FileOutputStream("./temp.txt");
+
+    while (inputStream.available() > 0)
+        outputStream.write(inputStream.read());
+
+    FileStream file = new FileStream(filepath);
+    while(file.available() > 0)
+      outputStream.write(file.read());
+    outputStream.close();
+    FileStream f = new FileStream("./temp.txt");
+    peer.put(guid, f);
   }
 
   public Result readMetaData() throws Exception {
@@ -166,14 +239,16 @@ public class DFS {
       pw.print("\"size\": \"" + file.getSize() + "\",");
       pw.print("\"pages\": [");
       List<Page> pages = file.getPages();
-      for (int j = 0; j < pages.size(); j++) {
-        Page page = pages.get(j);
-        pw.print("{");
-        pw.print("\"number\": \"" + page.getNumber() + "\",");
-        pw.print("\"guid\": \"" + page.getGuid() + "\",");
-        pw.print("\"size\": \"" + page.getSize() + "\"");
-        if(j == pages.size() - 1) pw.print("}");
-        else pw.print("},");
+      if(pages != null) {
+        for (int j = 0; j < pages.size(); j++) {
+          Page page = pages.get(j);
+          pw.print("{");
+          pw.print("\"number\": \"" + page.getNumber() + "\",");
+          pw.print("\"guid\": \"" + page.getGuid() + "\",");
+          pw.print("\"size\": \"" + page.getSize() + "\"");
+          if(j == pages.size() - 1) pw.print("}");
+          else pw.print("},");
+        }
       }
       pw.print("]");
       if(i == files.size() - 1) pw.print("}");

@@ -45,6 +45,18 @@ public class Client {
       case "mv":
         dfs.mv(args[1], args[2]);
         break;
+      case "append":
+        dfs.append(args[1], args[2]);
+        break;
+      case "read":
+        dfs.read(args[1], Integer.parseInt(args[2]));
+        break;
+      case "head":
+        dfs.head(args[1]);
+        break;
+      case "tail":
+        dfs.head(args[1]);
+        break;
       case "quit":
         System.exit(0);
       default:

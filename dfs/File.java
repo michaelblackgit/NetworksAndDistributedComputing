@@ -60,4 +60,12 @@ public class File {
         this.pages = pages;
     }
 
+    public void addPage(Page page) {
+      pages.add(page);
+    }
+
+    public void removePage(Page page) {
+      pages.remove(page);
+    }
+
 }
