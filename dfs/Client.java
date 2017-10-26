@@ -1,3 +1,4 @@
+//Michael Black and Derrick Nguyen
 import java.rmi.*;
 import java.net.*;
 import java.util.*;
@@ -6,7 +7,9 @@ import java.math.BigInteger;
 import java.security.*;
 import java.nio.file.*;
 
-
+/**
+ * Provides a simple user interface for the Distributed File System.
+ */
 public class Client {
   public static DFS dfs;
   public static Scanner in;
@@ -14,6 +17,12 @@ public class Client {
     dfs = new DFS(p);
   }
 
+  /**
+   * Main method for instantiating Client object, which instantiates
+   * a DFS object. This method also calls the user interface method.
+   * @param  String    args[]        [description]
+   * @throws Exception [description]
+   */
   static public void main(String args[]) throws Exception {
     if (args.length < 1 ) {
       throw new IllegalArgumentException("Parameter: <port>");
@@ -23,6 +32,12 @@ public class Client {
     ui();
   }
 
+  /**
+   * Method for user interface. Recursive call for command line.
+   * Each command the user enters simply calls the DFS object's method
+   * that corresponds.
+   * @throws Exception for the DFS object's methods that throw an exception.
+   */
   public static void ui() throws Exception {
     System.out.print(">> ");
     String line = in.nextLine();

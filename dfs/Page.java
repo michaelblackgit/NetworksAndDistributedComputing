@@ -1,6 +1,8 @@
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+/**
+ * Class for the structure of metadata. Simply stores attributes and provides getters and setters.
+ */
 public class Page {
 
     @SerializedName("number")

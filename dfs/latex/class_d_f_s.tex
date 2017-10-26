@@ -1,0 +1,257 @@
+\hypertarget{class_d_f_s}{}\section{D\+FS Class Reference}
+\label{class_d_f_s}\index{D\+FS@{D\+FS}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_d_f_s_ad863806217afcce82e64f5d7d4c124ad}{D\+FS} (int port)  throws Exception 
+\item 
+void \hyperlink{class_d_f_s_afb27b3ac552ee5a0b615f76157ebde81}{join} (String Ip, int port)  throws Exception 
+\item 
+void \hyperlink{class_d_f_s_af3c132a409c6f252fb20bae93e8ddc81}{ls} ()  throws Exception 
+\item 
+void \hyperlink{class_d_f_s_ac44bf8288f4423fc87370b97f95f07c1}{touch} (String file\+Name)  throws Exception 
+\item 
+void \hyperlink{class_d_f_s_a8e5dfe50eebc3c2131412cb35d8ec3f2}{rm} (String file\+Name)  throws Exception 
+\item 
+void \hyperlink{class_d_f_s_a7b0d44e11c6176a71d040919b6fe1d96}{mv} (String old\+Name, String new\+Name)  throws Exception 
+\item 
+void \hyperlink{class_d_f_s_a06f0b38ec2d726ec9c35b43f3e6d02e0}{read} (String file\+Name, int page\+Number)  throws Exception 
+\item 
+void \hyperlink{class_d_f_s_ac34aa133fcfaaf293e672b7574c599d6}{tail} (String file\+Name)  throws Exception 
+\item 
+void \hyperlink{class_d_f_s_a0651a87b91f3da25ea2f3fe605789d70}{head} (String file\+Name)  throws Exception 
+\item 
+void \hyperlink{class_d_f_s_a119519b72f38226815a4b65760701dcf}{append} (String filename, String filepath)  throws Exception 
+\item 
+\hyperlink{class_metadata}{Metadata} \hyperlink{class_d_f_s_a05df5c4a73e10460c29b14b46642eb8a}{read\+Meta\+Data} ()  throws Exception 
+\item 
+void \hyperlink{class_d_f_s_ae97c5b386f9d638a2ca9ebd79665bb25}{write\+Meta\+Data} (Input\+Stream stream)  throws Exception 
+\item 
+\hyperlink{class_file_stream}{File\+Stream} \hyperlink{class_d_f_s_a06f226c0d3f2e00a015c47e759d0fbc3}{format\+Meta\+Data} (\hyperlink{class_metadata}{Metadata} metadata)  throws Exception 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Distributed \hyperlink{class_file}{File} System that utilizes the methods of a \hyperlink{class_chord}{Chord} object. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_d_f_s_ad863806217afcce82e64f5d7d4c124ad}\label{class_d_f_s_ad863806217afcce82e64f5d7d4c124ad}} 
+\index{D\+FS@{D\+FS}!D\+FS@{D\+FS}}
+\index{D\+FS@{D\+FS}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{D\+F\+S()}{DFS()}}
+{\footnotesize\ttfamily D\+F\+S.\+D\+FS (\begin{DoxyParamCaption}\item[{int}]{port }\end{DoxyParamCaption}) throws Exception}
+
+Create a new instance of the Distributed \hyperlink{class_file}{File} System. 
+\begin{DoxyParams}{Parameters}
+{\em int} & port for specifying the port on this system to be connected. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & in the case that a file or address not found. \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_d_f_s_a119519b72f38226815a4b65760701dcf}\label{class_d_f_s_a119519b72f38226815a4b65760701dcf}} 
+\index{D\+FS@{D\+FS}!append@{append}}
+\index{append@{append}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily void D\+F\+S.\+append (\begin{DoxyParamCaption}\item[{String}]{filename,  }\item[{String}]{filepath }\end{DoxyParamCaption}) throws Exception}
+
+Method to append to a file. 
+\begin{DoxyParams}{Parameters}
+{\em String} & filename Name of the file to be appended to. \\
+\hline
+{\em String} & filepath \hyperlink{class_file}{File} path for the file to append with. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_d_f_s_a06f226c0d3f2e00a015c47e759d0fbc3}\label{class_d_f_s_a06f226c0d3f2e00a015c47e759d0fbc3}} 
+\index{D\+FS@{D\+FS}!format\+Meta\+Data@{format\+Meta\+Data}}
+\index{format\+Meta\+Data@{format\+Meta\+Data}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{format\+Meta\+Data()}{formatMetaData()}}
+{\footnotesize\ttfamily \hyperlink{class_file_stream}{File\+Stream} D\+F\+S.\+format\+Meta\+Data (\begin{DoxyParamCaption}\item[{\hyperlink{class_metadata}{Metadata}}]{metadata }\end{DoxyParamCaption}) throws Exception}
+
+Method to format the metadata. 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{class_metadata}{Metadata}} & metadata \hyperlink{class_metadata}{Metadata} to be formatted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_metadata}{Metadata} formatted as a \hyperlink{class_file_stream}{File\+Stream} (extension of Input\+Stream). 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_d_f_s_a0651a87b91f3da25ea2f3fe605789d70}\label{class_d_f_s_a0651a87b91f3da25ea2f3fe605789d70}} 
+\index{D\+FS@{D\+FS}!head@{head}}
+\index{head@{head}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{head()}{head()}}
+{\footnotesize\ttfamily void D\+F\+S.\+head (\begin{DoxyParamCaption}\item[{String}]{file\+Name }\end{DoxyParamCaption}) throws Exception}
+
+Method to read the first page of a file. 
+\begin{DoxyParams}{Parameters}
+{\em String} & file\+Name The name of th efile to be read from. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_d_f_s_afb27b3ac552ee5a0b615f76157ebde81}\label{class_d_f_s_afb27b3ac552ee5a0b615f76157ebde81}} 
+\index{D\+FS@{D\+FS}!join@{join}}
+\index{join@{join}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily void D\+F\+S.\+join (\begin{DoxyParamCaption}\item[{String}]{Ip,  }\item[{int}]{port }\end{DoxyParamCaption}) throws Exception}
+
+Method to join this node to another instance of the Distributed \hyperlink{class_file}{File} System. 
+\begin{DoxyParams}{Parameters}
+{\em String} & Ip The address of a node in the \hyperlink{class_d_f_s}{D\+FS} to be connected to. \\
+\hline
+{\em int} & port The port of the node in the \hyperlink{class_d_f_s}{D\+FS} to be connected to. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_d_f_s_af3c132a409c6f252fb20bae93e8ddc81}\label{class_d_f_s_af3c132a409c6f252fb20bae93e8ddc81}} 
+\index{D\+FS@{D\+FS}!ls@{ls}}
+\index{ls@{ls}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{ls()}{ls()}}
+{\footnotesize\ttfamily void D\+F\+S.\+ls (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws Exception}
+
+Method to list the files in the \hyperlink{class_d_f_s}{D\+FS}. 
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_d_f_s_a7b0d44e11c6176a71d040919b6fe1d96}\label{class_d_f_s_a7b0d44e11c6176a71d040919b6fe1d96}} 
+\index{D\+FS@{D\+FS}!mv@{mv}}
+\index{mv@{mv}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{mv()}{mv()}}
+{\footnotesize\ttfamily void D\+F\+S.\+mv (\begin{DoxyParamCaption}\item[{String}]{old\+Name,  }\item[{String}]{new\+Name }\end{DoxyParamCaption}) throws Exception}
+
+Method to rename the file. 
+\begin{DoxyParams}{Parameters}
+{\em String} & old\+Name The name of the file to be renamed. \\
+\hline
+{\em String} & new\+Name What the file should be renamed to. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_d_f_s_a06f0b38ec2d726ec9c35b43f3e6d02e0}\label{class_d_f_s_a06f0b38ec2d726ec9c35b43f3e6d02e0}} 
+\index{D\+FS@{D\+FS}!read@{read}}
+\index{read@{read}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily void D\+F\+S.\+read (\begin{DoxyParamCaption}\item[{String}]{file\+Name,  }\item[{int}]{page\+Number }\end{DoxyParamCaption}) throws Exception}
+
+Method to read a file page. 
+\begin{DoxyParams}{Parameters}
+{\em String} & file\+Name The name of the file to be looked at. \\
+\hline
+{\em int} & page\+Number The page to be read. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \mbox{[}description\mbox{]} \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_d_f_s_a05df5c4a73e10460c29b14b46642eb8a}\label{class_d_f_s_a05df5c4a73e10460c29b14b46642eb8a}} 
+\index{D\+FS@{D\+FS}!read\+Meta\+Data@{read\+Meta\+Data}}
+\index{read\+Meta\+Data@{read\+Meta\+Data}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{read\+Meta\+Data()}{readMetaData()}}
+{\footnotesize\ttfamily \hyperlink{class_metadata}{Metadata} D\+F\+S.\+read\+Meta\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws Exception}
+
+Method to read metadata from the \hyperlink{class_d_f_s}{D\+FS}. \begin{DoxyReturn}{Returns}
+The \hyperlink{class_metadata}{Metadata} object. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_d_f_s_a8e5dfe50eebc3c2131412cb35d8ec3f2}\label{class_d_f_s_a8e5dfe50eebc3c2131412cb35d8ec3f2}} 
+\index{D\+FS@{D\+FS}!rm@{rm}}
+\index{rm@{rm}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{rm()}{rm()}}
+{\footnotesize\ttfamily void D\+F\+S.\+rm (\begin{DoxyParamCaption}\item[{String}]{file\+Name }\end{DoxyParamCaption}) throws Exception}
+
+Method to remove a file from the \hyperlink{class_d_f_s}{D\+FS}. 
+\begin{DoxyParams}{Parameters}
+{\em String} & file\+Name Name of the file to be removed. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_d_f_s_ac34aa133fcfaaf293e672b7574c599d6}\label{class_d_f_s_ac34aa133fcfaaf293e672b7574c599d6}} 
+\index{D\+FS@{D\+FS}!tail@{tail}}
+\index{tail@{tail}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{tail()}{tail()}}
+{\footnotesize\ttfamily void D\+F\+S.\+tail (\begin{DoxyParamCaption}\item[{String}]{file\+Name }\end{DoxyParamCaption}) throws Exception}
+
+Method to read the last page of a file. 
+\begin{DoxyParams}{Parameters}
+{\em String} & file\+Name The name of the file to be read from. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_d_f_s_ac44bf8288f4423fc87370b97f95f07c1}\label{class_d_f_s_ac44bf8288f4423fc87370b97f95f07c1}} 
+\index{D\+FS@{D\+FS}!touch@{touch}}
+\index{touch@{touch}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{touch()}{touch()}}
+{\footnotesize\ttfamily void D\+F\+S.\+touch (\begin{DoxyParamCaption}\item[{String}]{file\+Name }\end{DoxyParamCaption}) throws Exception}
+
+Method to touch a new file in the \hyperlink{class_d_f_s}{D\+FS}. 
+\begin{DoxyParams}{Parameters}
+{\em String} & file\+Name The name of the file to be touched. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_d_f_s_ae97c5b386f9d638a2ca9ebd79665bb25}\label{class_d_f_s_ae97c5b386f9d638a2ca9ebd79665bb25}} 
+\index{D\+FS@{D\+FS}!write\+Meta\+Data@{write\+Meta\+Data}}
+\index{write\+Meta\+Data@{write\+Meta\+Data}!D\+FS@{D\+FS}}
+\subsubsection{\texorpdfstring{write\+Meta\+Data()}{writeMetaData()}}
+{\footnotesize\ttfamily void D\+F\+S.\+write\+Meta\+Data (\begin{DoxyParamCaption}\item[{Input\+Stream}]{stream }\end{DoxyParamCaption}) throws Exception}
+
+Method to write metadata 
+\begin{DoxyParams}{Parameters}
+{\em Input\+Stream} & stream \hyperlink{class_metadata}{Metadata} to be written. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+F\+S.\+java\end{DoxyCompactItemize}

@@ -1,0 +1,62 @@
+\hypertarget{class_client}{}\section{Client Class Reference}
+\label{class_client}\index{Client@{Client}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_client_acfd1d72bb41aa7e44b83f6f87c4ba52e}\label{class_client_acfd1d72bb41aa7e44b83f6f87c4ba52e}} 
+{\bfseries Client} (int p)  throws Exception 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_client_ac4219c51358857184ceeb023ada3d8ae}{main} (String args\mbox{[}$\,$\mbox{]})  throws Exception 
+\item 
+static void \hyperlink{class_client_a5a2336b78c9168bbfe9fb6664b4d5fb0}{ui} ()  throws Exception 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_client_a8a97d1d8ca81a411db565ca102408666}\label{class_client_a8a97d1d8ca81a411db565ca102408666}} 
+static \hyperlink{class_d_f_s}{D\+FS} {\bfseries dfs}
+\item 
+\mbox{\Hypertarget{class_client_ab8196da3c400a54c061e219bb721cbd3}\label{class_client_ab8196da3c400a54c061e219bb721cbd3}} 
+static Scanner {\bfseries in}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provides a simple user interface for the Distributed \hyperlink{class_file}{File} System. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_client_ac4219c51358857184ceeb023ada3d8ae}\label{class_client_ac4219c51358857184ceeb023ada3d8ae}} 
+\index{Client@{Client}!main@{main}}
+\index{main@{main}!Client@{Client}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily static void Client.\+main (\begin{DoxyParamCaption}\item[{String}]{args\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+Main method for instantiating \hyperlink{class_client}{Client} object, which instantiates a \hyperlink{class_d_f_s}{D\+FS} object. This method also calls the user interface method. 
+\begin{DoxyParams}{Parameters}
+{\em String} & args\mbox{[}\mbox{]} \mbox{[}description\mbox{]} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \mbox{[}description\mbox{]} \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_client_a5a2336b78c9168bbfe9fb6664b4d5fb0}\label{class_client_a5a2336b78c9168bbfe9fb6664b4d5fb0}} 
+\index{Client@{Client}!ui@{ui}}
+\index{ui@{ui}!Client@{Client}}
+\subsubsection{\texorpdfstring{ui()}{ui()}}
+{\footnotesize\ttfamily static void Client.\+ui (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+Method for user interface. Recursive call for command line. Each command the user enters simply calls the \hyperlink{class_d_f_s}{D\+FS} object\textquotesingle{}s method that corresponds. 
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & for the \hyperlink{class_d_f_s}{D\+FS} object\textquotesingle{}s methods that throw an exception. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Client.\+java\end{DoxyCompactItemize}
